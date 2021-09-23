@@ -46,13 +46,13 @@ int main(int argc, char **argv)
   return 0;
 }*/
 
-std_msgs::UInt16 msg;
+int num;
 bool pub_flag = false;
-void mission_callback(const std_msgs::UInt16& input)
+void mission_callback(const std_msgs::UInt16::ConstPtr& input)
 {
   //PUBLISHED_MESSAGE_TYPE output;
   //callback 함수에서 받은 input을 사용해서 output을 만들고 이를 pub한다.
-  msg = input;
+  num = input->data;
   pub_flag = true;
 }
 
@@ -67,10 +67,11 @@ int main(int argc, char **argv)
   ros::Rate loop_rate(100);
   while (ros::ok())
   {
-    //std_msgs::String msg;
-    //msg.data = "hello world";
+    std_msgs::UInt16 msg;
+    msg.data = num;
     if(pub_flag){
     chatter_pub.publish(msg);
+    pub_flag = false;
     }
 
     ros::spinOnce();

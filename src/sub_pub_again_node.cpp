@@ -2,7 +2,7 @@
 #include "std_msgs/String.h"
 #include "std_msgs/UInt16.h"
 #include "sensor_msgs/Joy.h"
-/*
+
 class SubscribeAndPublish
 {
 public:
@@ -37,15 +37,15 @@ private: //private으로 NodeHandle과 publisher, subscriber를 선언한다.
   ros::Subscriber joy_sub;
 
 };
-*//*
+
 int main(int argc, char **argv)
 {
   ros::init(argc, argv, "sub_pub_again_node");
   SubscribeAndPublish SAPObject; //클래스 객체 선을 하게 되면 모든게 된다.
   ros::spin();
   return 0;
-}*/
-
+}
+/*
 int num;
 bool pub_flag = false;
 void mission_callback(const std_msgs::UInt16::ConstPtr& input)
@@ -81,3 +81,4 @@ int main(int argc, char **argv)
 
   return 0;
 }
+*/

@@ -1,6 +1,7 @@
 #include "ros/ros.h"
 #include "std_msgs/String.h"
 #include "std_msgs/UInt16.h"
+#include "std_msgs/Int8.h"
 #include "sensor_msgs/Joy.h"
 
 class SubscribeAndPublish
@@ -14,6 +15,9 @@ public:
     //joy
     nuc2_joy_pub = n_.advertise<sensor_msgs::Joy>("/nuc2/joy", 1);
     joy_sub = n_.subscribe("/joy", 1, &SubscribeAndPublish::joy_callback, this);
+    //teleopoff
+    teleop_onoff_pub = n_.advertise<std_msgs::Int8>("/nuc2/teleop_onoff", 10);
+    teleop_onoff_sub = n_.subscribe("/joy", 1, &SubscribeAndPublish::joy_callback, this);
   }
 
   void mission_callback(const std_msgs::UInt16& input)
@@ -26,6 +30,11 @@ public:
   {
     nuc2_joy_pub.publish(input);
   }
+  void teleop_onoff_callback(const sensor_msgs::Joy& input)
+  {
+    teleop_onoff_pub.publish(input);
+  }
+
 
 private: //private으로 NodeHandle과 publisher, subscriber를 선언한다.
   //mission
@@ -35,6 +44,9 @@ private: //private으로 NodeHandle과 publisher, subscriber를 선언한다.
   //joy
   ros::Publisher nuc2_joy_pub;
   ros::Subscriber joy_sub;
+  //teleop_onoff
+  ros::Publisher teleop_onoff_pub;
+  ros::Subscriber teleop_onoff_sub;
 
 };
 

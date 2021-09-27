@@ -17,7 +17,7 @@ public:
     joy_sub = n_.subscribe("/joy", 1, &SubscribeAndPublish::joy_callback, this);
     //teleopoff
     teleop_onoff_pub = n_.advertise<std_msgs::Int8>("/nuc2/teleop_onoff", 10);
-    teleop_onoff_sub = n_.subscribe("/joy", 1, &SubscribeAndPublish::joy_callback, this);
+    teleop_onoff_sub = n_.subscribe("/teleop_onoff", 1, &SubscribeAndPublish::joy_callback, this);
   }
 
   void mission_callback(const std_msgs::UInt16& input)
